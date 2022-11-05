@@ -1,0 +1,7 @@
+org 100h
+
+mov ah, 00h
+int 0x16
+
+mov ax, 0x4C00
+int 0x21
