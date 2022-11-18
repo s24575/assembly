@@ -1,20 +1,29 @@
 org 100h
 
-mov ah, 0Ah
-mov dx, string
+mov AH, 0Ah
+mov DX, string
 int 21h
+;buffered input
 
-mov ah, 0Eh
-mov al, 0ah
+mov AH, 0Eh
+mov AL, 0Ah
 int 10h
-mov al, 0Dh
-int 10h
+;LF
 
-mov ah, 0Eh
-mov al, [string+4]
+mov AH, 0Eh
+mov AL, 0Dh
 int 10h
+;CR
 
-mov ax, 4c00h
+mov AH, 0Eh
+mov AL, [string+4]
+int 10h
+;3rd character
+
+mov AX, 4C00h
 int 21h
 
 string db 0Fh
+;buffer size
+
+;input a string, print new line (LFCR), print 3rd character

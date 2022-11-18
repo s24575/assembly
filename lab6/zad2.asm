@@ -3,14 +3,14 @@ org 100h
 mov AH, 00h
 int 16h
 mov AH, 09h
-cmp AL, "a"
-jl error
-cmp AL, "z"
-jle small
 cmp AL, "A"
 jl error
 cmp AL, "Z"
 jle big
+cmp AL, "a"
+jl error
+cmp AL, "z"
+jle small
 jmp end
 
 big:
@@ -32,3 +32,5 @@ int 21h
 small_str db "small", "$"
 big_str db "big", "$"
 error_str db "error", "$"
+
+;input a character, print it's case

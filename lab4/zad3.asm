@@ -1,23 +1,27 @@
 org 100h
 
-mov ah, 0Ah
-mov dx, string
+mov AH, 0Ah
+mov DX, string
 int 21h
+;buffered input
 
-mov bh, 00h
-mov bl, [string + 1] 
-mov byte [string + 2 + bx], "$"
+mov BL, [string + 1]
+mov byte [string + 2 + BX], "$"
+;put "$" at the end of the input
 
-mov dh, 12
-mov dl, 32
-mov ah, 0x02
-int 0x10
+mov DH, 12
+mov DL, 32
+mov AH, 02h
+int 10h
+;move cursor
 
 mov AH, 09h
 mov DX, string + 2
 int 21h
+;print input
 
-mov AX, 4c00h
+mov AX, 4C00h
 int 21h
 
 string db 16h
+;buffer size

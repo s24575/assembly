@@ -1,11 +1,12 @@
 org 100h
 
-mov ah, 3Ah
-mov dx, jajco
+mov AH, 3Ah
+mov DX, string
+int 21h
 
-int 0x21
+mov AX, 4C00h
+int 21h
 
-mov ax, 0x4C00
-int 0x21
+string db "GS18", 0h
 
-jajco db "GS18", 0h
+;remove a folder

@@ -1,12 +1,15 @@
 org 100h
 
 mov byte [string + 3], "$"
+;replace 4th character with "$"
 
-mov ah, 09h
-mov dx, string
+mov AH, 09h
+mov DX, string
 int 21h
 
-mov ax, 4c00h
+mov AX, 4C00h
 int 21h
 
 string db "EXAMPLE STRING"
+
+;print first 3 characters of a string

@@ -1,15 +1,18 @@
 org 100h
 
-mov dh, 12
-mov dl, 32
-mov ah, 0x02
-int 0x10
+mov DH, 12
+mov DL, 32
+mov AH, 02h
+int 10h
+;move cursor
 
-mov dx, name
-mov ah, 0x09
+mov DX, name
+mov AH, 09h
 int 21h
 
-mov ax, 0x4C00
-int 0x21
+mov AX, 4C00h
+int 21h
 
 name db "Grzegorz Sawicki", "$"
+
+;print name in the middle of the screen

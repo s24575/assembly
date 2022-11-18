@@ -1,17 +1,17 @@
 org 100h
 
 mov AX, [a]
-mov BL, 0x02
+mov BL, 0x2
 div BL
 mov CL, AL
 
 mov AX, [b]
-mov BL, 0x03
+mov BL, 0x3
 div BL
 add CL, AL
 
 mov AX, [c]
-mov BL, 0x04
+mov BL, 0x4
 div BL
 add CL, AL
 
@@ -21,6 +21,8 @@ mov AX, 4C00h
 int 21h
 
 a dw 0x05
-b dw 0x0f
+b dw 0x0F
 c dw 0x04
-y dw 0h
+y dw 0x0
+
+;(a / 2) + (b / 3) + (c / 4)

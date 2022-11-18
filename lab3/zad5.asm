@@ -1,11 +1,13 @@
 org 100h
 
-mov ah, 0x00
-mov al, 0x11
-int 0x10
+mov AH, 00h
+mov AL, 11h
+int 10h
 
-mov ah, 0x00
-int 0x16
+;mov AH, 00h
+int 16h
 
-mov ax, 0x4C00
+mov AX, 4C00h
 int 21h
+
+;change screen to 640x480 mono and wait for keyboard input

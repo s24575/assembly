@@ -1,11 +1,12 @@
 org 100h
 
-mov ah, 39h
-mov dx, jajco
+mov AH, 39h
+mov DX, string
+int 21h
 
-int 0x21
+mov AX, 4C00h
+int 21h
 
-mov ax, 0x4C00
-int 0x21
+string db "GS18", 0h
 
-jajco db "GS18", 0h
+;create a folder

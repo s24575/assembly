@@ -1,7 +1,9 @@
 org 100h
 
-mov ah, 00h
-int 0x16
+mov AH, 00h
+int 16h
 
-mov ax, 0x4C00
-int 0x21
+mov AX, 4C00h
+int 21h
+
+;input a character

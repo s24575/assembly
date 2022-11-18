@@ -11,7 +11,7 @@ mov DL, "<"
 jmp end
 
 equal:
-mov DX, "="
+mov DL, "="
 int 21h
 jmp end
 
@@ -22,3 +22,5 @@ end:
 int 21h
 mov AX, 4C00h
 int 21h
+
+;input a character, compare to "_" and print ">", "==" or "<"
