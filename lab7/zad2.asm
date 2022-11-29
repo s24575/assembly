@@ -22,3 +22,6 @@ a dw 02h
 b dw 04h
 c dw 06h
 result dw 00h
+
+; 2a + 2b - 2c
+; a b + c - 2 *

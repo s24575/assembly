@@ -21,3 +21,6 @@ a dw 02h
 b dw 04h
 c dw 06h
 result dw 00h
+
+; a / (b * c)
+; a b c * /

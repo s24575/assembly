@@ -1,16 +1,22 @@
 org 100h
 
 push word [a]
-push word [b]
-push word [c]
-pop BX
 pop AX
-mov DX, 00h
-div BX
+mul AX
+push AX
+push word [b]
+pop AX
+mov BX, 02h
+mul BX
 push AX
 pop BX
 pop AX
-mul BX
+add AX, BX
+push AX
+push word [c]
+pop BX
+pop AX
+add AX, BX
 
 mov [result], AX
 
@@ -22,5 +28,5 @@ b dw 04h
 c dw 06h
 result dw 00h
 
-; a * (b / c)
-; a b c / *
+; a^2 + 2b + c
+; a a * 2 b * + c +
