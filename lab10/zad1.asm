@@ -7,20 +7,32 @@ mov AX, 0001h
 int 33h
 
 main_loop:
+    mov AX, 0003h
+    int 33h
+
+    shr cx, 1
+
+    cmp BX, 0001h
+    je draw_pixel
+
+    jmp check_for_input
+
+check_for_input:
     mov AH, 01h
     int 16h
 
-    cmp AH, 10h
+    jz main_loop
+
+    cmp AL, 'q'
     je end
 
-    cmp AH, 11h
+    cmp AL, 'w'
     je change_color
 
-    mov AX, 0003h
-    int 33h
-    cmp BX, 0001h
-    je draw_pixel
-jmp main_loop
+    mov AX, 0C00h
+    int 21h
+
+    jmp main_loop
 
 draw_pixel:
     mov AH, 0Ch
@@ -42,7 +54,8 @@ draw_pixel:
     int 10h
     dec CX
     int 10h
-jmp main_loop
+    
+    jmp main_loop
 
 change_color:
     inc byte [color]
@@ -50,14 +63,17 @@ change_color:
     int 16h
     mov CX, 10h
     mov DX, 10h
-jmp main_loop
+
+    jmp draw_pixel
 
 end:
-mov AH, 00h
-int 16h
-mov AX, 0002h
-int 16h
-mov AX, 4C00h
-int 21h
+    mov AH, 00h
+    int 16h
+    mov AX, 0003h
+    int 10h
+    mov AX, 0002h
+    int 33h
+    mov AX, 4C00h
+    int 21h
 
-color dw 1
+color db 0
