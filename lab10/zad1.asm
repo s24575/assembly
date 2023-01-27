@@ -29,31 +29,40 @@ check_for_input:
     cmp AL, 'w'
     je change_color
 
+    cmp AL, 'a'
+    je dec_brush_size
+
+    cmp AL, 'd'
+    je inc_brush_size
+
     mov AX, 0C00h
     int 21h
 
     jmp main_loop
 
 draw_pixel:
+    dec DX
+    dec CX
+
     mov AH, 0Ch
     mov AL, [color]
-    int 10h
-    dec CX
-    int 10h
-    dec CX
-    int 10h
-    dec DX
-    int 10h
-    inc CX
-    int 10h
-    inc CX
-    int 10h
-    dec DX
-    int 10h
-    dec CX
-    int 10h
-    dec CX
-    int 10h
+    mov BL, [brush_size]
+    mov byte [i], BL
+
+    petla1:
+        mov byte [j], BL
+        petla2:
+            int 10h
+            dec DX
+            dec byte [j]
+            cmp byte [j], 00h
+            jne petla2
+        
+        add DL, [brush_size]
+        dec CX
+        dec byte [i]
+        cmp byte [i], 00h
+        jne petla1
     
     jmp main_loop
 
@@ -61,9 +70,21 @@ change_color:
     inc byte [color]
     mov AH, 00h
     int 16h
-    mov CX, 10h
-    mov DX, 10h
+    mov CX, [brush_size]
+    mov DX, [brush_size]
 
+    jmp draw_pixel
+
+inc_brush_size:
+    inc byte [brush_size]
+    mov AH, 00h
+    int 16h
+    jmp draw_pixel
+
+dec_brush_size:
+    dec byte [brush_size]
+    mov AH, 00h
+    int 16h
     jmp draw_pixel
 
 end:
@@ -76,4 +97,7 @@ end:
     mov AX, 4C00h
     int 21h
 
-color db 0
+color db 01h
+brush_size db 03h
+i db 00h
+j db 00h
